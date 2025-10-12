@@ -101,14 +101,62 @@
         font-size: 1.4rem;
       }
     }
+    header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  color: white;
+}
+
+.header-backdrop {
+  background-image: url('backdrop.jpg'); /* your backdrop image filename */
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Optional overlay for better text visibility */
+.header-backdrop::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 95, 153, 0.5); /* semi-transparent blue overlay */
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.header-backdrop h1,
+.header-backdrop p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.header-backdrop h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.header-backdrop p {
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
   </style>
 </head>
 <body>
 
   <header>
-    <img src="profile.jpg" alt="Vignesh V P" />
+    <div class="header-backdrop">
     <h1>VIGNESH V P</h1>
     <p>PhD Scholar | Construction Engineering and Management</p>
+    </div>
   </header>
 
   <section id="about">
