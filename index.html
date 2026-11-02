@@ -1,204 +1,379 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vignesh V P - PhD Scholar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset some defaults */
-    * {
-      box-sizing: border-box;
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Subsurface Research</title>
+<style>
+  /* Layout: single column, generous measure; a "section strata" motif — each section is a layer, marked by a depth eyebrow, like a soil/utility profile read top-down */
+  :root {
+    --bg: #f4f2ed;
+    --surface: #ffffff;
+    --fg: #1c1f26;
+    --muted: #5c6270;
+    --faint: #8b909c;
+    --line: #dcd8cf;
+    --accent: #c2541f;      /* locator-marker orange, the field colour of buried-utility paint */
+    --accent-soft: #f3e3d7;
+    --signal: #1f6f8b;      /* GPR trace teal */
+    --signal-soft: #dfecf0;
+    --code-bg: #efece5;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161b;
+      --surface: #1b1e25;
+      --fg: #eceef2;
+      --muted: #a2a8b5;
+      --faint: #6c7280;
+      --line: #2b2f38;
+      --accent: #e0702f;
+      --accent-soft: #38241a;
+      --signal: #4bb4cf;
+      --signal-soft: #142a31;
+      --code-bg: #20242c;
+      color-scheme: dark;
     }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f5f8fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 40px 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    header img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #005f99;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0,95,153,0.2);
-    }
-    header h1 {
-      font-family: 'Merriweather', serif;
-      font-size: 2.8rem;
-      margin-bottom: 8px;
-      color: #005f99;
-    }
-    header p {
-      font-style: italic;
-      color: #555;
-      font-size: 1.1rem;
-      margin-top: 0;
-    }
-    section {
-      margin-bottom: 50px;
-    }
-    h2 {
-      font-family: 'Merriweather', serif;
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #007acc;
-      border-bottom: 3px solid #007acc;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-    }
-    p, ul {
-      font-size: 1.1rem;
-      color: #444;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    ul li {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #007acc;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: #004f80;
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #777;
-      margin-top: 60px;
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
-    }
-    .contact-info a {
-      margin: 0 10px;
-      font-weight: 700;
-    }
-    @media (max-width: 600px) {
-      body {
-        padding: 20px 10px;
-      }
-      header h1 {
-        font-size: 2rem;
-      }
-      h2 {
-        font-size: 1.4rem;
-      }
-    }
-    header {
-  text-align: center;
-  margin-bottom: 60px;
-  position: relative;
-  color: white;
-}
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161b;
+    --surface: #1b1e25;
+    --fg: #eceef2;
+    --muted: #a2a8b5;
+    --faint: #6c7280;
+    --line: #2b2f38;
+    --accent: #e0702f;
+    --accent-soft: #38241a;
+    --signal: #4bb4cf;
+    --signal-soft: #142a31;
+    --code-bg: #20242c;
+    color-scheme: dark;
+  }
 
-.header-backdrop {
-  background-image: url('backdrop.jpg'); /* your backdrop image filename */
-  background-size: cover;
-  background-position: center;
-  padding: 80px 20px;
-  position: relative;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Spectral", Georgia, "Times New Roman", serif;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: max(22px, env(safe-area-inset-left, 0px));
+    padding-right: max(22px, env(safe-area-inset-right, 0px));
+  }
 
-/* Optional overlay for better text visibility */
-.header-backdrop::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 95, 153, 0.5); /* semi-transparent blue overlay */
-  border-radius: 12px;
-  z-index: 0;
-}
+  h1, h2, h3 { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; text-wrap: balance; letter-spacing: -0.01em; }
 
-.header-backdrop h1,
-.header-backdrop p {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-}
+  /* ---- eyebrow / depth label ---- */
+  .eyebrow {
+    font-family: "Archivo", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px; height: 2px; background: var(--accent); display: inline-block;
+  }
 
-.header-backdrop h1 {
-  font-family: 'Merriweather', serif;
-  font-size: 3rem;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
+  /* ---- hero ---- */
+  header.hero { padding-block: 64px 48px; border-bottom: 1px solid var(--line); }
+  .hero h1 {
+    font-size: clamp(2.1rem, 7vw, 3.3rem);
+    line-height: 1.05;
+    margin: 0 0 20px;
+    font-weight: 800;
+  }
+  .hero .lede {
+    font-size: clamp(1.1rem, 3.4vw, 1.3rem);
+    color: var(--muted);
+    max-width: 58ch;
+    margin: 0 0 26px;
+  }
+  .hero .name-row {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px;
+    font-family: "Archivo", sans-serif; margin: 0 0 8px;
+  }
+  .hero .name-row .who { font-weight: 700; font-size: 1.05rem; }
+  .hero .name-row .where { color: var(--faint); font-size: 0.95rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .links a {
+    font-family: "Archivo", sans-serif; font-size: 0.86rem; font-weight: 500;
+    text-decoration: none; color: var(--fg);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 15px; background: var(--surface);
+    transition: border-color .15s, color .15s;
+  }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
 
-.header-backdrop p {
-  font-style: italic;
-  font-size: 1.2rem;
-  font-weight: 400;
-}
+  /* ---- sections ---- */
+  section { padding-block: 48px; border-bottom: 1px solid var(--line); }
+  section > h2 { font-size: clamp(1.5rem, 4.5vw, 1.9rem); margin: 0 0 8px; font-weight: 700; }
+  section > .sub { color: var(--muted); margin: 0 0 30px; max-width: 60ch; }
 
-  </style>
-</head>
-<body>
+  /* ---- research themes ---- */
+  .themes { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .theme { background: var(--surface); padding: 24px; display: grid; gap: 8px; min-width: 0; }
+  .theme .tag { font-family: "Archivo", sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); }
+  .theme h3 { margin: 0; font-size: 1.14rem; }
+  .theme p { margin: 0; color: var(--muted); font-size: 0.97rem; }
 
-  <header>
-    <div class="header-backdrop">
-    <h1>VIGNESH V P</h1>
-    <p>PhD Scholar | Construction Engineering and Management</p>
+  /* ---- projects ---- */
+  .projects { display: grid; gap: 18px; }
+  .project {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; display: grid; gap: 10px; min-width: 0;
+  }
+  .project .phead { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .project h3 { margin: 0; font-size: 1.14rem; }
+  .project .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: "Archivo", sans-serif; font-size: 0.7rem; font-weight: 500;
+    background: var(--signal-soft); color: var(--signal);
+    border-radius: 5px; padding: 3px 8px; letter-spacing: 0.02em;
+  }
+  .chip.warm { background: var(--accent-soft); color: var(--accent); }
+  .project p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+  .project .repo {
+    font-family: "Archivo", sans-serif; font-size: 0.82rem; font-weight: 600;
+    color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 2px;
+  }
+  .project .repo:hover { text-decoration: underline; }
+  .project .repo .arrow { transition: transform .15s; }
+  .project .repo:hover .arrow { transform: translateX(3px); }
+
+  /* ---- publications ---- */
+  .pubs { display: grid; gap: 0; }
+  .pub {
+    display: grid; gap: 4px; padding: 18px 0; border-top: 1px solid var(--line);
+  }
+  .pub:first-child { border-top: none; }
+  .pub .venue { font-family: "Archivo", sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pub .status { color: var(--accent); }
+  .pub .ptitle { font-size: 1.04rem; font-weight: 600; color: var(--fg); line-height: 1.4; }
+  .pub .authors { font-size: 0.92rem; color: var(--muted); }
+
+  /* ---- blog ---- */
+  .blog-intro { display: grid; gap: 6px; margin-bottom: 24px; }
+  .series { display: grid; gap: 12px; }
+  .serie { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 20px; }
+  .serie h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .serie p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+
+  /* ---- toolbox strip ---- */
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool { font-family: "Archivo", sans-serif; font-size: 0.82rem; border: 1px solid var(--line); border-radius: 7px; padding: 7px 12px; background: var(--surface); color: var(--muted); }
+
+  /* ---- contact / footer ---- */
+  footer { padding-block: 48px 70px; }
+  footer .contact-line { font-size: 1.05rem; margin: 0 0 18px; color: var(--muted); }
+  footer .mail { color: var(--accent); font-weight: 600; word-break: break-all; }
+  .colophon { color: var(--faint); font-size: 0.82rem; font-family: "Archivo", sans-serif; margin-top: 34px; }
+
+  .guide-note {
+    background: var(--signal-soft); border: 1px dashed var(--signal); color: var(--fg);
+    border-radius: 10px; padding: 14px 18px; font-size: 0.86rem;
+    font-family: "Archivo", sans-serif; margin-block: 0 34px;
+  }
+  .guide-note b { color: var(--signal); }
+
+  a.inline { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    header.hero { padding-block: 44px 36px; }
+    .theme, .project { padding: 20px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Buried infrastructure &middot; digital twins</p>
+    <h1>Reading the ground before anyone breaks it.</h1>
+    <p class="lede">I research how cities can know what lies beneath them — locating buried utilities, scoring how much we trust that data, and building digital twins of assets no one can see.</p>
+    <div class="name-row">
+      <span class="who">Your Name</span>
+      <span class="where">PhD researcher · Palakkad, Kerala, India</span>
     </div>
+    <nav class="links">
+      <a href="#">CV (PDF)</a>
+      <a href="https://scholar.google.com">Google Scholar</a>
+      <a href="https://orcid.org">ORCID</a>
+      <a href="https://www.linkedin.com">LinkedIn</a>
+      <a href="https://github.com">GitHub</a>
+      <a href="mailto:yenthedal@gmail.com">Email</a>
+    </nav>
   </header>
 
   <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I am a PhD scholar specializing in Construction Engineering and Management. My research focuses on Digital Construction, Smart Cities &amp; Digital Twins. I am passionate about advancing knowledge in Digital Construction through innovative methods and collaborations.
-    </p>
+    <p class="eyebrow">About</p>
+    <h2>What I work on</h2>
+    <p class="sub">My doctoral research sits where surveying, BIM and asset management meet the problem of invisible infrastructure. I work hands-on across the full capture-to-model pipeline — field instruments, reality capture, and the data frameworks that make the records usable.</p>
+    <p style="margin:0; color:var(--muted); max-width:62ch;">Alongside buried utilities, I have published on bridge and road asset condition, and I teach BIM for construction management as a teaching assistant. I care most about the step that is usually skipped: deciding how much a piece of subsurface data can actually be trusted, and carrying that confidence through into a working digital twin.</p>
   </section>
 
   <section id="research">
-    <h2>Research Interests</h2>
-    <ul>
-      <li>BIM</li>
-      <li>Reality Capture</li>
-      <li>City Modeling</li>
-    </ul>
+    <p class="eyebrow">Research &middot; thesis chapters</p>
+    <h2>Five threads</h2>
+    <p class="sub">My thesis runs from deciding <em>what</em> to investigate first, through <em>how</em> to capture it, to <em>trusting and modelling</em> the result as one connected city.</p>
+    <div class="themes">
+      <div class="theme">
+        <span class="tag">Prioritisation</span>
+        <h3>Which ground to dig first</h3>
+        <p>A method for ranking underground infrastructure investigation by risk, uncertainty and value — so limited survey budgets go where they matter.</p>
+      </div>
+      <div class="theme">
+        <span class="tag">Confidence framework</span>
+        <h3>How much to trust the record</h3>
+        <p>An event-based framework that scores the reliability of subsurface utility data by how, when and with what method each point was captured.</p>
+      </div>
+      <div class="theme">
+        <span class="tag">Remote sensing</span>
+        <h3>Finding pipelines from above</h3>
+        <p>Using satellite imagery and vegetation response to detect buried pipeline corridors across greenfield sites, before anyone sets foot on the ground.</p>
+      </div>
+      <div class="theme">
+        <span class="tag">Reality capture</span>
+        <h3>Capturing the unseen</h3>
+        <p>Field workflows with GPR, LiDAR, GNSS and augmented reality to locate, record and visualise buried assets with spatial accuracy.</p>
+      </div>
+      <div class="theme">
+        <span class="tag">Digital twin</span>
+        <h3>One city, every asset</h3>
+        <p>Tying buried utilities together with surface assets into a cross-asset urban digital twin that holds both the geometry and the confidence behind it.</p>
+      </div>
+    </div>
   </section>
-
-
 
   <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><em>Coming soon...</em></li>
-    </ul>
+    <p class="eyebrow">Mini projects</p>
+    <h2>Workflows &amp; tools</h2>
+    <p class="sub">Small, reproducible pieces of work — field methods documented step by step, with sample data and figures. Code where there is code; a clear method where the work lives in the software.</p>
+    <div class="projects">
+
+      <div class="project">
+        <div class="phead">
+          <h3>Point-cloud damage mapping</h3>
+          <div class="stack"><span class="chip">CloudCompare</span><span class="chip">LiDAR</span><span class="chip warm">M3C2</span></div>
+        </div>
+        <p>A documented workflow for detecting and quantifying surface damage on bridge and road assets from terrestrial LiDAR scans — cloud-to-cloud distance, M3C2 parameters, and before/after figures. No custom code needed; the repo is the method plus a sample cloud.</p>
+        <a class="repo" href="https://github.com">View workflow &amp; data <span class="arrow">&rarr;</span></a>
+      </div>
+
+      <div class="project">
+        <div class="phead">
+          <h3>Pipeline corridor from satellite NDVI</h3>
+          <div class="stack"><span class="chip">Google Earth Engine</span><span class="chip warm">NDVI</span></div>
+        </div>
+        <p>Scripts and screenshots showing how vegetation indices reveal a buried pipeline corridor on a greenfield campus — the detection logic behind my journal paper, packaged so others can reproduce it on their own site.</p>
+        <a class="repo" href="https://github.com">View repository <span class="arrow">&rarr;</span></a>
+      </div>
+
+      <div class="project">
+        <div class="phead">
+          <h3>Scan-vs-BIM progress check</h3>
+          <div class="stack"><span class="chip">TLS</span><span class="chip">Revit / IFC</span><span class="chip warm">EVM</span></div>
+        </div>
+        <p>Comparing an as-built point cloud against an as-planned BIM model to measure construction progress on precast elements, without full reconstruction — and reading it as schedule performance.</p>
+        <a class="repo" href="https://github.com">View repository <span class="arrow">&rarr;</span></a>
+      </div>
+
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      Feel free to reach out via email or connect on social media.
-    </p>
-    <p class="contact-info">
-      <a href="102214002@smail.iitpkd.ac.in">Email</a> |
-      <a href="www.linkedin.com/in/vignesh-v-p-256887230" target="_blank" rel="noopener">LinkedIn</a> |
-      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-    </p>
+  <section id="publications">
+    <p class="eyebrow">Publications</p>
+    <h2>Selected papers</h2>
+    <p class="sub">Journal and conference work across subsurface utilities, reality capture and BIM. Replace with your real titles, co-authors and DOI links — one line each.</p>
+    <div class="pubs">
+      <div class="pub">
+        <div class="venue"><span>Journal</span> <span class="status">· in major revision</span></div>
+        <div class="ptitle">Satellite NDVI detection of buried pipeline corridors on a greenfield campus</div>
+        <div class="authors">Your Name, Co-authors · Add DOI / preprint link</div>
+      </div>
+      <div class="pub">
+        <div class="venue"><span>Conference</span></div>
+        <div class="ptitle">An event-based framework for subsurface utility data collection and confidence</div>
+        <div class="authors">Your Name, Co-authors · ISARC · Add DOI link</div>
+      </div>
+      <div class="pub">
+        <div class="venue"><span>Conference</span></div>
+        <div class="ptitle">Immersive VR for pre-construction BIM design review</div>
+        <div class="authors">Your Name, Co-authors · CIB W78 · Add DOI link</div>
+      </div>
+      <div class="pub">
+        <div class="venue"><span>Journal</span></div>
+        <div class="ptitle">GIS KML-vs-CAD conflict screening for utilities at concept stage</div>
+        <div class="authors">Your Name, Co-authors · Add DOI link</div>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>© 2025 Vignesh V P. All rights reserved.</p>
+  <section id="writing">
+    <p class="eyebrow">Writing</p>
+    <h2>Field notes</h2>
+    <div class="blog-intro">
+      <p class="sub" style="margin:0;">Short, practical posts on locating, modelling and managing infrastructure — written as running series. I publish roughly once a month.</p>
+    </div>
+    <div class="series">
+      <div class="serie">
+        <h3>The Underground Detectives</h3>
+        <p>Field scenarios in GPR and electromagnetic locating — why maps fail, and how two methods cross-verify each other.</p>
+      </div>
+      <div class="serie">
+        <h3>BIM in Practice</h3>
+        <p>ISO 19650, clash detection and 4D/5D on real projects, for people who build as well as model.</p>
+      </div>
+      <div class="serie">
+        <h3>Reality Capture Notes</h3>
+        <p>Point clouds, LiDAR path planning and AR/VR — what the instruments do well, and where they quietly mislead.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolbox">
+    <p class="eyebrow">Toolbox</p>
+    <h2>Hands-on with</h2>
+    <div class="tools">
+      <span class="tool">GPR</span>
+      <span class="tool">Electromagnetic locating</span>
+      <span class="tool">Terrestrial &amp; SLAM LiDAR</span>
+      <span class="tool">GNSS</span>
+      <span class="tool">CloudCompare</span>
+      <span class="tool">Revit &amp; Navisworks</span>
+      <span class="tool">Bentley</span>
+      <span class="tool">Augmented &amp; Virtual Reality</span>
+      <span class="tool">4D / 5D BIM</span>
+      <span class="tool">ISO 19650</span>
+      <span class="tool">Google Earth Engine</span>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p class="eyebrow">Contact</p>
+    <h2 style="font-family:Archivo,sans-serif; font-size:1.7rem; margin:0 0 16px; font-weight:700;">Looking for a postdoc or research collaboration</h2>
+    <p class="contact-line">I'm open to postdoctoral positions and collaborations in subsurface data, digital twins and reality capture. Reach me at <span class="mail">yenthedal@gmail.com</span>.</p>
+
+    <div class="guide-note">
+      <b>This is your editable placeholder.</b> Swap in your name, the six link URLs in the header, your real publication titles and DOI links, and your three GitHub repo links. Everything is plain text in one file — nothing here needs code to change. Delete this box before you publish.
+    </div>
+
+    <p class="colophon">Built as a single static page · hosted free on GitHub Pages.</p>
   </footer>
 
-</body>
-</html>
+</div>
+
+</body></html>
