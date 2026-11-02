@@ -44,7 +44,7 @@
 
   h1, h2 { font-family: var(--f-disp); font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
   h3, h4 { font-family: var(--f-head); font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
-  .wrap { max-width: 1120px; margin: 0 auto;
+  .wrap { max-width: 1280px; margin: 0 auto;
     padding-left: max(28px, env(safe-area-inset-left, 0px)); padding-right: max(28px, env(safe-area-inset-right, 0px)); }
   body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
 
@@ -88,9 +88,7 @@
   .links a { font-family: var(--f-head); font-size: .84rem; font-weight: 600; text-decoration: none; color: var(--ink);
     border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 16px; background: var(--surface); transition: border-color .15s, color .15s, background .15s; }
   .links a:hover { border-color: var(--accent); color: #fff; background: var(--accent); }
-  .hero-media { border: 1px dashed var(--line-strong); background: var(--surface); aspect-ratio: 4 / 3; border-radius: var(--r);
-    display: grid; place-items: center; text-align: center; color: var(--faint); font-family: var(--f-head); font-size: .82rem; padding: 18px; }
-  .hero-media .big { font-size: 1.5rem; display: block; margin-bottom: 8px; color: var(--accent); }
+  .hero-media { border: 1px solid var(--line); background: var(--surface); aspect-ratio: 4 / 3; border-radius: var(--r); overflow: hidden; }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 48px; }
   .stat { background: var(--surface); padding: 22px; }
@@ -123,8 +121,12 @@
   /* projects */
   .grid { display: grid; gap: 16px; }
   @media (min-width: 640px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .grid.two { grid-template-columns: 1fr 1fr 1fr; } }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 11px; min-width: 0; align-content: start; }
-  .card .media { order: -1; }
+  .card { transition: transform .18s ease, box-shadow .22s ease, border-color .18s ease; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(20,20,15,.07); border-color: var(--line-strong); }
+  .card .media { order: -1; overflow: hidden; }
+  .media svg, .hero-media svg { width: 100%; height: 100%; display: block; }
   .card .ch { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   .card h3 { margin: 0; font-size: 1.08rem; } .card p { margin: 0; color: var(--muted); font-size: .93rem; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -134,8 +136,8 @@
   .status.done { background: var(--good-soft); color: var(--good); }
   .status.prog { background: var(--spark-soft); color: var(--spark); }
   .status.plan { background: var(--plan-soft); color: var(--plan); }
-  .media { border: 1px dashed var(--line-strong); background: var(--paper2); aspect-ratio: 5 / 2; border-radius: 8px;
-    display: grid; place-items: center; text-align: center; color: var(--faint); font-family: var(--f-head); font-size: .68rem; padding: 10px; letter-spacing: .04em; }
+  .media { border: 1px solid var(--line); background: var(--paper2); aspect-ratio: 5 / 2; border-radius: 8px;
+    display: grid; place-items: center; text-align: center; color: var(--faint); font-family: var(--f-head); font-size: .66rem; letter-spacing: .04em; }
 
   /* publications timeline */
   .pubgroup { margin-bottom: 42px; }
@@ -173,12 +175,20 @@
   details.abs .body { margin-top: 9px; font-size: .94rem; color: var(--muted); line-height: 1.62; max-width: 76ch; border-left: 2px solid var(--line-strong); padding-left: 16px; }
 
   /* world map */
-  .mapbox { position: relative; width: 100%; aspect-ratio: 2 / 1; max-height: 470px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); overflow: hidden; margin: 2px 0 14px; }
+  .mapbox { position: relative; width: 100%; aspect-ratio: 2 / 1; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); overflow: hidden; margin: 2px 0 14px; }
   .mapbox svg.wmap { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .mapbox svg.wmap path { fill: var(--paper2); stroke: var(--line-strong); stroke-width: .4; }
   .pin { position: absolute; width: 12px; height: 12px; transform: translate(-50%, -50%); border-radius: 50%;
     background: var(--spark); box-shadow: 0 0 0 2px var(--surface), 0 0 0 5px color-mix(in srgb, var(--spark) 32%, transparent); cursor: pointer; }
   .pin:hover { background: var(--accent); }
+  .pin::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--spark); opacity: .5; animation: ping 2.8s ease-out infinite; }
+  @keyframes ping { 0% { transform: scale(.55); opacity: .5 } 70%, 100% { transform: scale(1.9); opacity: 0 } }
+  .hero-illus .scan { animation: sweep 5s ease-in-out infinite; transform-origin: center; }
+  @keyframes sweep { 0%,100% { transform: translateX(-70px) } 50% { transform: translateX(70px) } }
+  .hero-illus .node { animation: nodepulse 2.6s ease-in-out infinite; }
+  .hero-illus .node:nth-child(odd) { animation-delay: 1.1s }
+  @keyframes nodepulse { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { .pin::after, .hero-illus .scan, .hero-illus .node { animation: none } .pin::after { opacity: 0 } }
   .mapnote { font-family: var(--f-head); font-size: .78rem; color: var(--faint); max-width: 70ch; }
 
   /* cv */
@@ -261,7 +271,23 @@
           <a href="mailto:xx@gmail.com">Email</a>
         </div>
       </div>
-      <div class="hero-media"><span><span class="big">◳</span>Add a hero image or GIF<br>a point cloud, GPR scan or AR overlay</span></div>
+      <div class="hero-media"><svg class="hero-illus" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="City cross-section: buildings, a bridge and a road above ground; buried utility pipelines below, with a ground-scanning sensor.">
+<rect width="400" height="320" fill="var(--paper2)"/>
+<g fill="var(--muted)" opacity=".32"><rect x="250" y="72" width="32" height="108"/><rect x="286" y="42" width="26" height="138"/><rect x="316" y="88" width="30" height="92"/><rect x="350" y="58" width="24" height="122"/></g>
+<g fill="var(--surface)" opacity=".6"><rect x="256" y="82" width="6" height="8"/><rect x="268" y="82" width="6" height="8"/><rect x="256" y="98" width="6" height="8"/><rect x="292" y="54" width="6" height="8"/><rect x="302" y="54" width="6" height="8"/><rect x="292" y="72" width="6" height="8"/><rect x="356" y="70" width="6" height="8"/><rect x="366" y="70" width="6" height="8"/></g>
+<g stroke="var(--muted)" stroke-width="2.4" fill="none" opacity=".55"><path d="M18 178 Q84 118 150 178"/><line x1="18" y1="150" x2="150" y2="150"/><line x1="40" y1="150" x2="48" y2="168"/><line x1="66" y1="150" x2="68" y2="158"/><line x1="100" y1="150" x2="98" y2="158"/><line x1="126" y1="150" x2="134" y2="168"/></g>
+<rect x="150" y="150" width="250" height="28" fill="var(--muted)" opacity=".16"/>
+<line x1="162" y1="164" x2="392" y2="164" stroke="var(--surface)" stroke-width="2.5" stroke-dasharray="11 11"/>
+<rect x="0" y="177" width="400" height="4" fill="var(--line-strong)"/>
+<rect x="0" y="181" width="400" height="139" fill="var(--line-strong)" opacity=".12"/>
+<line x1="92" y1="181" x2="92" y2="214" stroke="var(--accent)" stroke-width="2" opacity=".4"/><line x1="300" y1="181" x2="300" y2="214" stroke="var(--accent)" stroke-width="2" opacity=".4"/>
+<rect x="0" y="214" width="400" height="9" rx="4.5" fill="var(--accent)" opacity=".7"/>
+<rect x="0" y="250" width="400" height="7" rx="3.5" fill="var(--spark)" opacity=".62"/>
+<path d="M0 288 C120 288 150 300 400 294" stroke="var(--muted)" stroke-width="6" fill="none" opacity=".45"/>
+<g fill="var(--accent)"><circle class="node" cx="92" cy="218" r="5"/><circle class="node" cx="300" cy="218" r="5"/></g>
+<circle class="node" cx="200" cy="253" r="4.5" fill="var(--spark)"/>
+<g class="scan"><circle cx="200" cy="150" r="6" fill="var(--spark)"/><path d="M200 156 L176 181 L224 181 Z" fill="var(--spark)" opacity=".18"/></g>
+</svg></div>
     </div>
     <div class="stats">
       <div class="stat"><div class="n">2</div><div class="l">Q1 journals</div></div>
@@ -303,14 +329,14 @@
     </div>
 
     <h3 style="font-family:var(--f-disp); font-weight:600; font-size:1.5rem; margin:44px 0 6px;">Research projects</h3>
-    <p class="sub" style="margin-bottom:18px;">Sponsored projects I worked on as a research fellow, with the outcomes they produced.</p>
+    <p class="sub" style="margin-bottom:18px;">Sponsored projects I worked on as a research fellow, with the outputs they produced.</p>
     <div style="display:grid; gap:16px;">
       <div class="fund">
         <span class="org">GITA · India–Taiwan Joint S&amp;T Collaboration</span>
         <h3>A cyber-physical system for decision-making in smart-city infrastructure management</h3>
         <span class="role">Role · Research Fellow — JRF (1 yr) → SRF (2 yr), IIT Palakkad</span>
         <p>Bilateral research connecting sensed infrastructure data to decision support for urban asset management. Included visiting research stays at National Taiwan University, Taipei.</p>
-        <div class="outlabel">Outcomes</div>
+        <div class="outlabel">Outputs</div>
         <div class="outs">
           <a data-scroll="p-i3ce26">From scan to field: AR visualization of as-laid utility geometry — i3CE 2026 →</a>
           <a data-scroll="p-isarc26">Event-based subsurface utility data collection framework — ISARC 2026 →</a>
@@ -323,7 +349,7 @@
         <h3>Temporal geometric damage assessment of bridges through LiDAR</h3>
         <span class="role">Role · Research Fellow — JRF (3 months), IIT Palakkad</span>
         <p>An investigative study on surface and profile damage detection in bridge infrastructure using terrestrial laser scanning and efficient scan-area planning.</p>
-        <div class="outlabel">Outcomes</div>
+        <div class="outlabel">Outputs</div>
         <div class="outs">
           <a data-scroll="p-autc25">Temporal surface damage assessment of bridges — Automation in Construction 2025 →</a>
           <a data-scroll="p-isarc23">Demonstration of LiDAR on surface damage measurement — ISARC 2023 →</a>
@@ -337,15 +363,16 @@
   <section class="panel" id="tab-projects">
     <p class="eyebrow">Projects</p>
     <h2>Hands-on work</h2>
+    <p class="sub">Applied BIM, reality-capture and digital-twin projects. Each will carry its own screenshots, a short demo GIF or video, and a link to the method or repository as I publish them.</p>
     <div class="grid two">
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>Utility mapping — LiDAR + 3DGS</h3><span class="status prog">In progress</span></div><p>As-laid utility geometry captured with LiDAR and 3D Gaussian Splatting for dense, photoreal site records.</p><div class="chips"><span class="chip">LiDAR</span><span class="chip warm">3DGS</span><span class="chip">Utilities</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>AR for buried utilities</h3><span class="status prog">In progress</span></div><p>TLS-based as-laid utility geometry overlaid onto the real site through augmented reality for field verification.</p><div class="chips"><span class="chip warm">AR</span><span class="chip">TLS</span><span class="chip">Unity</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>Scan-to-BIM</h3><span class="status done">Done</span></div><p>As-built BIM models reconstructed from terrestrial LiDAR point clouds of real buildings.</p><div class="chips"><span class="chip">LiDAR</span><span class="chip">Revit</span><span class="chip warm">Point cloud</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>Scan-vs-BIM progress monitoring</h3><span class="status done">Done</span></div><p>As-built scan compared against an as-planned model to measure construction progress as schedule performance.</p><div class="chips"><span class="chip">TLS</span><span class="chip">4D BIM</span><span class="chip warm">EVM</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>VR for BIM design review</h3><span class="status done">Done</span></div><p>Immersive VR walkthroughs of BIM models for pre-construction design review and coordination.</p><div class="chips"><span class="chip warm">VR</span><span class="chip">BIM</span><span class="chip">Design review</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>Reality capture to 3D print</h3><span class="status done">Done</span></div><p>End-to-end scan-to-print: objects and structures captured and reproduced as scaled 3D-printed prototypes.</p><div class="chips"><span class="chip">Reality capture</span><span class="chip warm">3D printing</span></div></div>
-      <div class="card"><div class="media">ADD SCREENSHOT / GIF</div><div class="ch"><h3>4D / 5D / 6D BIM</h3><span class="status done">Done</span></div><p>Time, cost and asset-information dimensions on BIM models, with clash detection and construction sequencing.</p><div class="chips"><span class="chip">Navisworks</span><span class="chip">Scheduling</span><span class="chip warm">ISO 19650</span></div></div>
-      <div class="card"><div class="media">COMING SOON</div><div class="ch"><h3>More mini projects</h3><span class="status plan">Planned</span></div><p>A rolling set of small point-cloud and BIM-automation projects, added monthly with demos and short write-ups.</p><div class="chips"><span class="chip">Point cloud</span><span class="chip">Automation</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><rect x="0" y="46" width="220" height="2" fill="var(--line-strong)"/><rect x="18" y="58" width="184" height="7" rx="3.5" fill="var(--accent)" opacity=".55"/><rect x="40" y="72" width="140" height="6" rx="3" fill="var(--spark)" opacity=".5"/><circle cx="110" cy="20" r="6" fill="var(--accent)"/><path d="M110 26 L78 46 M110 26 L110 46 M110 26 L142 46" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".55"/><g fill="var(--spark)" opacity=".75"><circle cx="80" cy="45" r="1.4"/><circle cx="96" cy="44" r="1.4"/><circle cx="110" cy="45" r="1.4"/><circle cx="124" cy="44" r="1.4"/><circle cx="140" cy="45" r="1.4"/></g></svg></div><div class="ch"><h3>Utility mapping — LiDAR + 3DGS</h3><span class="status prog">In progress</span></div><p>As-laid utility geometry captured with LiDAR and 3D Gaussian Splatting for dense, photoreal site records.</p><div class="chips"><span class="chip">LiDAR</span><span class="chip warm">3DGS</span><span class="chip">Utilities</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><rect x="0" y="54" width="220" height="2" fill="var(--line-strong)"/><rect x="10" y="64" width="200" height="7" rx="3.5" fill="var(--accent)" opacity=".35"/><rect x="74" y="16" width="72" height="54" rx="7" fill="var(--surface)" stroke="var(--muted)" stroke-width="2"/><rect x="82" y="48" width="56" height="6" rx="3" fill="var(--spark)"/><circle cx="110" cy="51" r="3" fill="var(--accent)"/><path d="M88 30 h-6 v6 M132 30 h6 v6 M88 44 h-6 v-6 M132 44 h6 v-6" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity=".6"/></svg></div><div class="ch"><h3>AR for buried utilities</h3><span class="status prog">In progress</span></div><p>TLS-based as-laid utility geometry overlaid onto the real site through augmented reality for field verification.</p><div class="chips"><span class="chip warm">AR</span><span class="chip">TLS</span><span class="chip">Unity</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><g fill="var(--spark)" opacity=".7"><circle cx="24" cy="24" r="1.6"/><circle cx="38" cy="22" r="1.6"/><circle cx="52" cy="26" r="1.6"/><circle cx="30" cy="38" r="1.6"/><circle cx="46" cy="40" r="1.6"/><circle cx="60" cy="36" r="1.6"/><circle cx="26" cy="54" r="1.6"/><circle cx="42" cy="56" r="1.6"/><circle cx="58" cy="52" r="1.6"/><circle cx="36" cy="68" r="1.6"/><circle cx="52" cy="68" r="1.6"/></g><path d="M84 45 h24 m-7 -5 l7 5 l-7 5" stroke="var(--muted)" stroke-width="2" fill="none"/><g stroke="var(--accent)" stroke-width="2" fill="none"><rect x="140" y="24" width="50" height="46"/><line x1="140" y1="40" x2="190" y2="40"/><line x1="157" y1="40" x2="157" y2="70"/><line x1="173" y1="40" x2="173" y2="70"/></g></svg></div><div class="ch"><h3>Scan-to-BIM</h3><span class="status done">Done</span></div><p>As-built BIM models reconstructed from terrestrial LiDAR point clouds of real buildings.</p><div class="chips"><span class="chip">LiDAR</span><span class="chip">Revit</span><span class="chip warm">Point cloud</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><g fill="var(--accent)" opacity=".7"><circle cx="52" cy="24" r="1.6"/><circle cx="68" cy="24" r="1.6"/><circle cx="84" cy="24" r="1.6"/><circle cx="52" cy="38" r="1.6"/><circle cx="68" cy="38" r="1.6"/><circle cx="84" cy="38" r="1.6"/><circle cx="52" cy="52" r="1.6"/><circle cx="68" cy="52" r="1.6"/><circle cx="84" cy="52" r="1.6"/></g><rect x="112" y="16" width="56" height="46" fill="var(--spark)" opacity=".16" stroke="var(--spark)" stroke-width="1.5"/><line x1="112" y1="32" x2="168" y2="32" stroke="var(--spark)" stroke-width="1" opacity=".5"/><line x1="112" y1="47" x2="168" y2="47" stroke="var(--spark)" stroke-width="1" opacity=".5"/><rect x="40" y="74" width="140" height="7" rx="3.5" fill="var(--line-strong)"/><rect x="40" y="74" width="96" height="7" rx="3.5" fill="var(--accent)"/></svg></div><div class="ch"><h3>Scan-vs-BIM progress monitoring</h3><span class="status done">Done</span></div><p>As-built scan compared against an as-planned model to measure construction progress as schedule performance.</p><div class="chips"><span class="chip">TLS</span><span class="chip">4D BIM</span><span class="chip warm">EVM</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><g stroke="var(--spark)" stroke-width="1.5" fill="none"><rect x="100" y="10" width="20" height="14"/><line x1="110" y1="10" x2="110" y2="24"/></g><rect x="68" y="30" width="84" height="6" rx="3" fill="var(--accent)" opacity=".5"/><rect x="58" y="36" width="104" height="34" rx="16" fill="var(--accent)"/><circle cx="86" cy="53" r="9" fill="var(--paper2)" opacity=".9"/><circle cx="134" cy="53" r="9" fill="var(--paper2)" opacity=".9"/><path d="M110 36 v34" stroke="var(--paper2)" stroke-width="2" opacity=".35"/></svg></div><div class="ch"><h3>VR for BIM design review</h3><span class="status done">Done</span></div><p>Immersive VR walkthroughs of BIM models for pre-construction design review and coordination.</p><div class="chips"><span class="chip warm">VR</span><span class="chip">BIM</span><span class="chip">Design review</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><circle cx="40" cy="45" r="5" fill="var(--accent)"/><path d="M45 45 L96 28 M45 45 L96 45 M45 45 L96 62" stroke="var(--accent)" stroke-dasharray="2 3" stroke-width="1.2" opacity=".5"/><g><rect x="130" y="58" width="52" height="6" fill="var(--spark)" opacity=".9"/><rect x="134" y="50" width="44" height="6" fill="var(--spark)" opacity=".72"/><rect x="138" y="42" width="36" height="6" fill="var(--spark)" opacity=".56"/><rect x="143" y="34" width="26" height="6" fill="var(--spark)" opacity=".42"/></g><rect x="120" y="66" width="72" height="3" fill="var(--muted)" opacity=".4"/></svg></div><div class="ch"><h3>Reality capture to 3D print</h3><span class="status done">Done</span></div><p>End-to-end scan-to-print: objects and structures captured and reproduced as scaled 3D-printed prototypes.</p><div class="chips"><span class="chip">Reality capture</span><span class="chip warm">3D printing</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><g stroke-width="1.5"><path d="M72 60 l38 -14 l38 14 l-38 14 z" fill="var(--accent-soft)" stroke="var(--accent)"/><path d="M72 45 l38 -14 l38 14 l-38 14 z" fill="var(--surface)" stroke="var(--accent)"/><path d="M72 30 l38 -14 l38 14 l-38 14 z" fill="var(--spark-soft)" stroke="var(--spark)"/></g></svg></div><div class="ch"><h3>4D / 5D / 6D BIM</h3><span class="status done">Done</span></div><p>Time, cost and asset-information dimensions on BIM models, with clash detection and construction sequencing.</p><div class="chips"><span class="chip">Navisworks</span><span class="chip">Scheduling</span><span class="chip warm">ISO 19650</span></div></div>
+      <div class="card"><div class="media"><svg viewBox="0 0 220 90" preserveAspectRatio="xMidYMid slice" role="img"><rect width="220" height="90" fill="var(--paper2)"/><g fill="var(--muted)" opacity=".45"><circle cx="48" cy="30" r="3"/><circle cx="74" cy="30" r="3"/><circle cx="100" cy="30" r="3"/><circle cx="48" cy="55" r="3"/><circle cx="74" cy="55" r="3"/><circle cx="100" cy="55" r="3"/></g><g stroke="var(--accent)" stroke-width="2.4"><line x1="150" y1="43" x2="176" y2="43"/><line x1="163" y1="30" x2="163" y2="56"/></g></svg></div><div class="ch"><h3>More mini projects</h3><span class="status plan">Planned</span></div><p>A rolling set of small point-cloud and BIM-automation projects, added monthly with demos and short write-ups.</p><div class="chips"><span class="chip">Point cloud</span><span class="chip">Automation</span></div></div>
     </div>
   </section>
 
@@ -353,7 +380,8 @@
   <section class="panel" id="tab-publications">
     <p class="eyebrow">Publications</p>
     <h2>Research outcomes</h2>
-    
+    <p class="sub">Newest first; papers under review are shown at the top. Author shown in <span class="me">orange</span> is me; S. Venkatachalam is co-author throughout. A DOI means the paper is in the proceedings; talks without one are marked <b>oral</b>.</p>
+
     <div class="pubgroup">
       <h3>Journal articles <span class="count">2 under review · 2 published</span></h3>
       <div class="tl">
@@ -599,6 +627,17 @@
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
     (mq.addEventListener ? mq.addEventListener('change', redraw) : mq.addListener && mq.addListener(redraw));
   }
+  function countUp(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.stat .n').forEach(function(el){
+      var target=parseInt(el.textContent,10); if(isNaN(target))return; var suf=el.textContent.replace(/[0-9]/g,'');
+      var t0=null,dur=850;
+      function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
+        el.textContent=Math.round(target*e)+suf; if(p<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    });
+  }
+  countUp();
   drawField();
 })();
 </script>
